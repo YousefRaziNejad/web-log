@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+{% if user.is_authenticated %}
+<a href="{% url 'logout-view' %}">خروج</a>
+<br>
+<a href="{% url 'post-create' %}">ایجاد پست</a>
+
+{% else %}
+
+<a href="{% url 'register' %}">سبتنام</a>
+<br>
+<a href="{% url 'login' %}">ورود</a>
+
+{% endif %}
+
+<form action="{% url 'post-search' %}" method="get">
+
+<input type="search" name="q" placeholder="دنبال چی میگردی"/>
+</form><br>
+<h1>{{request.user.username}}<h1>
+{% block content %}
+
+
+{% endblock %}
+</body>
+</html>

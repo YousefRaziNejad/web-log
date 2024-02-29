@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}
+ورود به وبسایت
+{% endblock %}
+
+{% block content %}
+
+<form action="{% url 'login' %}" method="POST">
+
+{% csrf_token %}
+<h3>ورود</h3>
+<hr>
+{% if messages %}
+{% for message in messages %}
+{{ message}}
+{% endfor %}
+{% endif %}
+
+<input type="text" name="username" aria-describedby="emailHelp"
+placeholder="Enter username" required>
+<br>
+<input type="password" name="password" placeholder="Password" required>
+
+<p>اگر اکانت ندارید <a href="{% url "register" %}">سبت نام</a></p>
+
+<button type="submit">ورود</button>
+
+</form>
+{% endblock %}

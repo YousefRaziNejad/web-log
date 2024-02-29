@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{category.name}}
+{% endblock %}
+
+{% block content %}
+<h1>{{category.name}}</h1>
+<p>{{category.avatar}}</p>
+<br>
+<p>{{category.content}}</p>
+<p>{{category.posts.count}}<br>تعدادپست های موجود در این دسته بندی</p>
+<h2>پست های این دسته بندی</h2>
+{% for post in category.posts.all %}
+<h3>{{post.title}}<h3>
+<p>{{post.created_time}}</p>
+<a href="{% url 'post-detail' post.id %}">برای خواندن این پست اینجا را کلیک کنید</a>
+{% endfor %}
+{% endblock %}

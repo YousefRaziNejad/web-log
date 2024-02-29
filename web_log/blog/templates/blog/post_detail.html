@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{post.title}}
+{% endblock %}
+
+{% block content %}
+{% if user.email == post.user.email %}
+<a href="{% url 'post-update' post.id %}">ویرایش پست</a><br>
+<a href="{% url 'post-delete' post.id %}">حذف کردن پست</a>
+{% endif %}
+<br>
+<p>ایجاد شده در: <br>
+{{post.created_time}}</p>
+<p>آخرین بروز رسانی: <br>
+{{post.updated_time}}</p>
+<p>ایجاد شده توصته: <br>
+{{post.user.username}}</p>
+<br>
+<h2>{{post.title}}</h2><br>
+<p>{{post.img}}</p><br>
+<p>{{post.content}}</p>
+
+<p><a href="{% url 'category-detail' post.category.id %}">{{post.category}}</a></p>
+<hr>
+<a href="{% url 'add-comment' post.id %}">اضافه کردن کامنت</a>
+<h3>نظرات این پست</h3><br>
+{% for comment in post.comments.all %}
+<div>{{comment.created_time}}</div>
+<strong>{{comment.name }}</strong>
+<p>{{comment.content|linebreaks }}</p>
+{% empty %}
+<p>هیچ کامنتی برای این پست موجود نیست</p>
+{% endfor %}
+
+{% endblock %}
